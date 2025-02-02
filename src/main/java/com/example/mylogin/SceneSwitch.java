@@ -6,14 +6,13 @@ import java.io.IOException;
 
 public class SceneSwitch {
 
-//    public SceneSwitch(BorderPane currentPage, String fxml ) throws IOException {
-//
-//        BorderPane nextBorderPane = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource(fxml)));
-//        currentPage.getChildren().removeAll(nextBorderPane);
-//        currentPage.getChildren().setAll(nextBorderPane);
+//    public SceneSwitch(AnchorPane currentPage, String fxml ) throws IOException {
+//        AnchorPane nextAnchorPane = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource(fxml)));
+//        currentPage.getChildren().removeAll(nextAnchorPane);
+//        currentPage.getChildren().setAll(nextAnchorPane);
 //    }
 
-    private FXMLLoader loader;
+    private final FXMLLoader loader;
 
     public SceneSwitch(BorderPane currentPage, String fxml) throws IOException {
         loader = new FXMLLoader(DataInfoApp.class.getResource(fxml));

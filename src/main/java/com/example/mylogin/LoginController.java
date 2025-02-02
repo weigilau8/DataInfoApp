@@ -33,32 +33,29 @@ public class LoginController {
         else {
 
             try {
+
                 // Load the JDBC driver
-                Class.forName("com.mysql.cj.jdbc.Driver");
+                Class.forName("com.mysql.jdbc.Driver");
 
                 // Connect to database using try-with-resources
                 try (Connection conDB = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
                     // Use PreparedStatement to prevent SQL injection
                     String query = "SELECT * FROM user_info WHERE email = ? AND password = ?";
 
-                    try (PreparedStatement pstmt = conDB.prepareStatement(query)) {
-                        pstmt.setString(1, email.getText().trim());
-                        pstmt.setString(2, password.getText().trim());
+                    try (PreparedStatement beforeQuery = conDB.prepareStatement(query)) {
+                        beforeQuery.setString(1, email.getText().trim());
+                        beforeQuery.setString(2, password.getText().trim());
 
                         // Execute query
-                        try (ResultSet data = pstmt.executeQuery()) {
+                        try (ResultSet data = beforeQuery.executeQuery()) {
                             if (data.next()) {
                                 message.setText("Login Successful!");
 
+                                // Redirect to dashboard page
                                 int userId = data.getInt("id");
                                 SceneSwitch sceneSwitch = new SceneSwitch(loginPage, "dashboard-view.fxml");
                                 DashboardController dashboardController = sceneSwitch.getController();
                                 dashboardController.setUserId(userId);
-
-                                // Redirect to dashboard page
-                               // SceneSwitch sceneSwitch = new SceneSwitch(loginPage, "dashboard-view.fxml");
-                               // DashboardController dashboardController = sceneSwitch.getController();
-                               // dashboardController.setUserEmail(email.getText());
 
                             } else {
                                 // Login failed

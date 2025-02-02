@@ -2,11 +2,8 @@ package com.example.mylogin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -45,12 +42,12 @@ public class DashboardController {
                     // Use theEmail parameter instead of userEmail
                     beforeQuery.setInt(1, id);
 
-                    try (ResultSet afterQuery = beforeQuery.executeQuery()) {
-                        if (afterQuery.next()) {  // Changed while to if since email is unique
-                            firstNameLabel.setText(afterQuery.getString("first_name"));
-                            lastNameLabel.setText(afterQuery.getString("last_name"));
-                            emailLabel.setText(afterQuery.getString("email"));
-                            userLabel.setText(afterQuery.getString("first_name") + " " + afterQuery.getString("last_name"));
+                    try (ResultSet data = beforeQuery.executeQuery()) {
+                        if (data.next()) {  // Changed while to if since email is unique
+                            firstNameLabel.setText(data.getString("first_name"));
+                            lastNameLabel.setText(data.getString("last_name"));
+                            emailLabel.setText(data.getString("email"));
+                            userLabel.setText(data.getString("first_name") + " " + data.getString("last_name"));
 
                         }
                     }
@@ -63,7 +60,7 @@ public class DashboardController {
 
     @FXML
     public void onClickLogout(ActionEvent event) throws IOException {
-        userId = Integer.parseInt(null);
+        userId = 0;
         new SceneSwitch(dashboardPage, "login-view.fxml");
     }
 
