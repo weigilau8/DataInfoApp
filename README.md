@@ -6,10 +6,12 @@
  Used Mysql for database.
 
 Login UI
+
  <img width="842" alt="01 Login" src="https://github.com/user-attachments/assets/95662fbc-1f89-4362-8406-6a45fee2a61d" />
 
 Login with Validation
 Login : No User or Pass
+
  <img width="859" alt="02 Login No Email or Pass" src="https://github.com/user-attachments/assets/d519753b-f526-450a-a195-62090cf0e854" />
 
 Login : No Password
